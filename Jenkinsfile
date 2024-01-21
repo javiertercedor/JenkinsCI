@@ -1,12 +1,4 @@
-def buildStage() {
-    stage('Build') {
-        steps {
-            script {
-                sh 'mvn clean install -DskipTests'
-            }
-        }
-    }
-}
+@Library('jenkins-shared-library')_
 
 pipeline {
     agent any
@@ -22,7 +14,13 @@ pipeline {
             }
         }
 
-        buildStage()
+        stage('Build') {
+            steps {
+                script {
+                    buildStage
+                }
+            }
+        }
     }
 
     post {
