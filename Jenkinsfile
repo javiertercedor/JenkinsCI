@@ -1,3 +1,13 @@
+def buildStage() {
+    stage('Build') {
+        steps {
+            script {
+                sh 'mvn clean install -DskipTests'
+            }
+        }
+    }
+}
+
 pipeline {
     agent any
 
@@ -21,16 +31,6 @@ pipeline {
         }
         failure {
             echo 'Build failed!'
-        }
-    }
-}
-
-def buildStage() {
-    stage('Build') {
-        steps {
-            script {
-                sh 'mvn clean install -DskipTests'
-            }
         }
     }
 }
