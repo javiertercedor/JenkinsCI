@@ -1,0 +1,28 @@
+# Use the CircleCI 2.1 configuration syntax
+version: 2.1
+
+# Define jobs and workflows
+jobs:
+  build:
+    docker:
+      - image: maven:3.6-jdk-11
+
+    steps:
+      - checkout # Check out the code from the repository
+      - run: mvn clean compile # Build the project
+
+  test:
+    docker:
+      - image: maven:3.6-jdk-11
+
+    steps:
+      - checkout
+      - run: mvn test # Run tests
+
+# Define workflows to orchestrate jobs
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test

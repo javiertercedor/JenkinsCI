@@ -1,0 +1,23 @@
+# Define the base image for the runner
+image: maven:3.6-jdk-11
+
+# Definition of pipeline stages
+stages:
+  - build
+  - test
+
+# Define environment variables
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  # You can add more variables as needed
+
+# Define tasks for each stage
+build:
+  stage: build
+  script:
+    - mvn clean compile
+
+test:
+  stage: test
+  script:
+    - mvn test

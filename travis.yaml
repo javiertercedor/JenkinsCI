@@ -1,0 +1,27 @@
+# Choose the operating system
+os: linux
+
+# Choose the programming language
+language: java
+
+# Specify the JDK versions to test against
+jdk:
+  - openjdk11
+
+# Define the stages of the pipeline
+stages:
+  - name: build
+  - name: test
+
+# Define the jobs for each stage
+jobs:
+  include:
+    - stage: build
+      name: "Build Stage"
+      script:
+        - mvn clean compile
+
+    - stage: test
+      name: "Test Stage"
+      script:
+        - mvn test
