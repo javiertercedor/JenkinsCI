@@ -19,6 +19,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Security') {
+            steps {
+                script {
+                    withMaven(maven: 'Maven') {
+                        sh 'mvn org.owasp:dependency-check-maven:check'
+                    }
+                }
+            }
+        }
     }
 
     post {
