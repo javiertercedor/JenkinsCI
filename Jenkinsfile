@@ -1,3 +1,5 @@
+@Library('jenkins-shared-library')_
+
 pipeline {
     agent any
 
@@ -15,22 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'mvn clean install -DskipTests'
-                }
-            }
-        }
-
-        stage('Test') {
-            parallel {
-                stage('Unit Tests') {
-                    steps {
-                        sh 'mvn clean test -Ptest'
-                    }
-                }
-                stage('Integration Tests') {
-                    steps {
-                        sh 'mvn clean test -Pittest'
-                    }
+                    buildStage
                 }
             }
         }
