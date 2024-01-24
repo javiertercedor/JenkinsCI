@@ -1,5 +1,3 @@
-@Library('jenkins-shared-library')_
-
 pipeline {
     agent any
 
@@ -17,7 +15,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    buildStage
+                    sh 'mvn clean install'
                 }
             }
         }
