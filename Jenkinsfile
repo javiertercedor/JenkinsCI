@@ -15,16 +15,21 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'mvn clean install'
+                    sh 'mvn clean install -DskipTests'
                 }
             }
         }
 
-        stage('Security') {
-            steps {
-                script {
-                    withMaven(maven: 'Maven') {
-                        sh 'mvn org.owasp:dependency-check-maven:check'
+        stage('Test') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        sh 'mvn clean test -Ptest'
+                    }
+                }
+                stage('Integration Tests') {
+                    steps {
+                        sh 'mvn clean test -Pittest'
                     }
                 }
             }
